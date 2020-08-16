@@ -1,16 +1,14 @@
 defmodule Chop do
-  def guess(n, a..b) when n == div(a+b, 2) do
-    IO.puts("Is it #{n}")
-    n
+  def guess(actual, range = low..high) do
+    middle = div(low + high, 2)
+    IO.puts("Is it #{middle}")
+    _guess(actual, range, middle)
   end
-  def guess(n, a..b) when n > div(a+b, 2) do
-    guess_number = div(a+b, 2)
-    IO.puts("Is it #{guess_number}")
-    guess(n, guess_number..b)
+  defp _guess(actual, _low..high, middle) when actual > middle do
+    guess(actual, (middle + 1)..high)
   end
-  def guess(n, a..b) when n < div(a+b, 2) do
-    guess_number = div(a+b, 2)
-    IO.puts("Is it #{guess_number}")
-    guess(n, a..guess_number)
+  defp _guess(actual, low.._high, middle) when actual < middle do
+    guess(actual, low..(middle - 1))
   end
+  defp _guess(actual, _range, actual), do: actual
 end

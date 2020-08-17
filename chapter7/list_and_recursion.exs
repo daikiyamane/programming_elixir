@@ -31,4 +31,13 @@ defmodule Mylist do
     _max(tail, current)
   end
 
+  #list_and_recursion_3
+  def caesar([], _), do: []
+  def caesar([head | tail], n) do
+    [char(head + n) | caesar(tail, n)]
+  end
+  defp char(n) when ?a <= n and ?z >= n, do: n
+  defp char(n) do
+    ?a + rem(n - ?z, ?z - ?a + 1) - 1
+  end
 end

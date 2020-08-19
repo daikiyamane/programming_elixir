@@ -40,4 +40,8 @@ defmodule Mylist do
   defp char(n) do
     ?a + rem(n - ?z, ?z - ?a + 1) - 1
   end
+
+  #list_and_recursion_4
+  def span(from, to) when from > to, do: []
+  def span(from, to), do: [from | span(from+1, to)]
 end

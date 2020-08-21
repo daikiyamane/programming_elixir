@@ -44,4 +44,13 @@ defmodule Mylist do
   #list_and_recursion_4
   def span(from, to) when from > to, do: []
   def span(from, to), do: [from | span(from + 1, to)]
+
+  #list_and_recursion_5
+  def all?(enumerable, fun \\ fn x -> x end)
+  def all?([], _fun), do: true
+  def all?(_enumerable = [head | tail], fun), do: _all?(tail, fun, fun.(head))
+  defp _all?(_, _, false), do: false
+  defp _all?([], _, true), do: true
+  defp _all?([head | tail], fun, _bool), do: _all?(tail, fun, fun.(head))
+
 end

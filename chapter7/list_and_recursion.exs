@@ -53,4 +53,11 @@ defmodule Mylist do
   defp _all?([], _, true), do: true
   defp _all?([head | tail], fun, _bool), do: _all?(tail, fun, fun.(head))
 
+  def each(enumerable, fun), do: _each(enumerable, fun)
+  defp _each([], _), do: :ok
+  defp _each([head | tail], fun) do
+    fun.(head)
+    _each(tail, fun)
+  end
+
 end

@@ -69,4 +69,24 @@ defmodule Mylist do
       _filter(tail, fun)
     end
   end
+
+  def split(enumerable, count), do: _split(enumerable, count, [])
+
+  defp _split([], _, first), do: {:lists.reverse(first), []}
+
+  defp _split(enumerable, 0, first), do: {:lists.reverse(first), enumerable}
+
+  defp _split(enumerable = [head | tail], count, first) do
+    if count > 0 do
+      _split(tail, count - 1, [head | first])
+    else
+      c = length(enumerable) + count
+      cond do
+        c <= 0 ->
+          {[], enumerable}
+        true ->
+          _split(tail, c - 1, [head | first])
+      end
+    end
+  end
 end

@@ -60,4 +60,13 @@ defmodule Mylist do
     _each(tail, fun)
   end
 
+  def filter(enumerable, fun), do: _filter(enumerable, fun)
+  defp _filter([], _fun), do: []
+  defp _filter([head | tail], fun) do
+    if fun.(head) do
+      [head | _filter(tail, fun)]
+    else
+      _filter(tail, fun)
+    end
+  end
 end

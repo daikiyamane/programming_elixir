@@ -120,4 +120,12 @@ defmodule Mylist do
   defp _take([head | tail], amount, list, op) do
     _take(tail, amount - 1, [head | list], op)
   end
+
+  ##list_and_recursion_6
+  def flatten([]), do: []
+
+  def flatten([h | t]), do: flatten(h) ++ flatten(t)
+
+  def flatten(x), do: [x]
+
 end

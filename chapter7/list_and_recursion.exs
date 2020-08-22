@@ -89,4 +89,35 @@ defmodule Mylist do
       end
     end
   end
+
+  def take(enumerable, amount) do
+    if amount >= 0 do
+      _take(enumerable, amount, [], "+")
+    else
+      :lists.reverse(enumerable)
+        |> _take(amount * (-1), [], "-")
+    end
+  end
+
+  defp _take(_, 0, list, op) do
+    case op do
+      "+" ->
+        :lists.reverse(list)
+      "-" ->
+        list
+    end
+  end
+
+  defp _take([], _, list, op) do
+    case op do
+      "+" ->
+        :lists.reverse(list)
+      "-" ->
+        list
+    end
+  end
+
+  defp _take([head | tail], amount, list, op) do
+    _take(tail, amount - 1, [head | list], op)
+  end
 end

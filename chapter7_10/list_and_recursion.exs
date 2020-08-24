@@ -33,17 +33,23 @@ defmodule Mylist do
 
   #list_and_recursion_3
   def caesar([], _), do: []
+
   def caesar([head | tail], n) do
     [char(head + n) | caesar(tail, n)]
   end
+
   defp char(n) when ?a <= n and ?z >= n, do: n
+
   defp char(n) do
     ?a + rem(n - ?z, ?z - ?a + 1) - 1
   end
 
   #list_and_recursion_4
-  def span(from, to) when from > to, do: []
-  def span(from, to), do: [from | span(from + 1, to)]
+  def span(from, to), do: _span(from, to, [])
+
+  defp _span(from, to, acc) when from > to, do: Enum.reverse(acc)
+
+  defp _span(from, to, acc), do: _span(from + 1, to, [from | acc])
 
   #list_and_recursion_5
   def all?(enumerable, fun \\ fn x -> x end)
@@ -127,5 +133,10 @@ defmodule Mylist do
   def flatten([h | t]), do: flatten(h) ++ flatten(t)
 
   def flatten(x), do: [x]
+
+  #list_and_recursion7
+  def span_for(n) do
+    for x <- span(2, n), Enum.all?(span(2, n), &(&1 >= x or rem(x,&1) != 0)), do: x
+  end
 
 end

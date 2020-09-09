@@ -32,4 +32,20 @@ defmodule StringsAndBinaries do
         _digit(t, value)
     end
   end
+
+  #StringsAndBinaries-5
+
+  def center(list) do
+    max_len =
+      Enum.max_by(list, &String.length/1)
+      |> String.length()
+      _center(list, max_len)
+  end
+
+  defp _center([h | [] ], _), do: IO.puts(h)
+  defp _center([h | t], max_len) do
+    space_len = div(max_len - String.length(h), 2)
+    IO.puts("#{String.duplicate(" ", space_len)}#{h}")
+    _center(t, max_len)
+  end
 end
